@@ -6,7 +6,7 @@ interface IUser extends Document {
   name: string;
   email: string;
   photo: string;
-  role: "admin" | "user";
+  role: "admin" | "user" | "vendors";
   gender: "male" | "female";
   dob: Date;
   createdAt: Date;
@@ -33,11 +33,11 @@ const schema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      required: [true, "Please add Photo"],
+      required: [true, "Please upload photo"],
     },
     role: {
       type: String,
-      enum: ["superAdmin","admin", "user"],
+      enum: ["vendors","admin", "user"],
       default: "user",
     },
     gender: {

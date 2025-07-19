@@ -9,6 +9,7 @@ const port = 3043;
 
 // Importing routes
 import userRoute from "./routes/user.js";
+import productRoute from "./routes/product.js";
 
 // Mongo connection
 mongoConnection();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 // Using routes
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/product", productRoute);
 
 
 
