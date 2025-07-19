@@ -1,9 +1,9 @@
 import express from "express";
+import { new_user } from "../controllers/user.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) =>{
-    res.send("hello bhai kya hal hai tere");
-})
+router.post("/new", new_user);
 
+    
 export default router;
