@@ -1,6 +1,6 @@
 import express from "express";
 import { deleteUser, getAllUsers, getUser, new_user } from "../controllers/user.js";
-import { onlyAdmin } from "../middlewares/auth.js";
+import { authorizeRoles } from "../middlewares/auth.js";
 
 
 const router = express.Router();
@@ -9,10 +9,10 @@ const router = express.Router();
 router.post("/new", new_user);
 
 // Get All users ---onlyonlyAdmin
-router.get("/all", onlyAdmin, getAllUsers);
+router.get("/all", authorizeRoles('admin'), getAllUsers);
 
 // Get single user and delete user ---onlyonlyAdmin
-router.route("/:id").get(onlyAdmin, getUser).delete(onlyAdmin, deleteUser);
+router.route("/:id").get(authorizeRoles('admin'), getUser).delete(authorizeRoles('admin'), deleteUser);
 
 
     

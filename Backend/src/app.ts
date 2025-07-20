@@ -21,7 +21,8 @@ app.use(bodyParser.json());
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
 
-
+// Declare uploads as a static folder
+app.use("/uploads", express.static('uploads'));
 
 // Error handler middleware
 app.use(ErrorMiddleware);

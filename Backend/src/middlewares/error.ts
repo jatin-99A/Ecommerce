@@ -17,7 +17,7 @@ export const ErrorMiddleware = (
 
   } else if ((err.cause as any)?.code === 11000) {
     statusCode = 409;
-    message = "Duplicate key error";
+    message = "Please use a unique value";
   } else if (err.name === "CastError") {
     statusCode = 400;
     message = "Invalid ID format";

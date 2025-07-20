@@ -1,8 +1,10 @@
 import { User } from "../models/user.js";
 import { tryCatch } from "../middlewares/error.js";
 import ErrorHandler from "../utils/utility-class.js";
+import { NextFunction, Request, Response } from "express";
+import { NewUserRequestBody } from "../types/types.js";
 
-export const new_user = tryCatch(async (req, res, next) => {
+export const new_user = tryCatch(async (req:Request<{},{},NewUserRequestBody>, res:Response, next:NextFunction) => {
   const { name, email, photo, gender, _id, dob } = req.body;
 
   let user = await User.findOne({ _id });
