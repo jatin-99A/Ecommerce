@@ -14,26 +14,24 @@ export const ErrorMiddleware = (
 
   if (err.name === "ValidationError") {
     statusCode = 400;
-
   } else if ((err.cause as any)?.code === 11000) {
     statusCode = 409;
     message = "Please use a unique value";
   } else if (err.name === "CastError") {
     statusCode = 400;
     message = "Invalid ID format";
+  } else if (err.name === "SyntaxError") {
+    statusCode = 400;
+    message = "Malformed JSON in request body";
   } else if (
     err.name === "JsonWebTokenError" ||
     err.name === "TokenExpiredError"
   ) {
     statusCode = 401;
-
   } else if (err.statusCode && typeof err.statusCode === "number") {
     statusCode = err.statusCode;
     message = err.message || message;
   }
-
-  
-//   console.error("Error →", err);
 
   return res.status(statusCode).json({
     success: false,
@@ -42,7 +40,8 @@ export const ErrorMiddleware = (
 };
 
 // Async error handler
-export const tryCatch = (controller: controllerType) =>
+export const tryCatch =
+  (controller: controllerType) =>
   (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(controller(req, res, next)).catch(next);
   };

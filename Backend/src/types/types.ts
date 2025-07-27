@@ -24,3 +24,26 @@ export type controllerType = (
   res: Response,
   next: NextFunction
 ) => Promise<any>;
+
+// Searched query body type
+export interface SearchedQueryBody {
+  search?: string;
+  category?: string;
+  brand?: string;
+  ltePrice?: string;
+  gtePrice?: string;
+  rating?:  string;
+  sort?: string;
+  page?: string;
+}
+
+// Query object type for searched
+export interface SearchQueryObject {
+  search?: { $regex: string, $options: string };
+  category?: string;
+  brand?: string;
+  price?: { $lte?: number, $gte?: number};
+  rating?:  { $gte: number};
+  sort?: string;
+  page?: number;
+}
